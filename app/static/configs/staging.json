@@ -27,7 +27,8 @@
       "depTree",
       "review",
       "history",
-      "comments"
+      "comments",
+      "hello"
     ]
   },
 
@@ -51,6 +52,11 @@
   },
 
   "plugins" : {
+
+    "hello" : {
+      "template" : "js/arethusa.hello/templates/hello.html"
+    },
+
     "text" : {
       "main" : true,
       "template"  : "js/templates/text_with_context.html"
