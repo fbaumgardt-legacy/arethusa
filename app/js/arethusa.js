@@ -35,6 +35,7 @@ angular.module('arethusa').config([
       $routeProvider.when('/morph_tools', MORPH_TOOLS);
       //$routeProvider.when('/conf_editor', CONF_ROUTE);
       $routeProvider.when('/:conf', MAIN_ROUTE);
+      $routProvider.when('/local',LOCAL_ROUTE);
       //$routeProvider.when('/conf_editor/:conf', CONF_ROUTE);
     }
 
@@ -46,7 +47,7 @@ angular.module('arethusa').config([
 
     $translateProvider
       .useStaticFilesLoader({
-        prefix: arethusa.basePath + '/dist/i18n/',
+        prefix: arethusa.basePath + '/i18n/',
         suffix: '.json'
       })
 
@@ -59,12 +60,12 @@ angular.module('arethusa').config([
   },
 ]);
 
-angular.module('arethusa').value('CONF_PATH', '../dist/configs');
+angular.module('arethusa').value('CONF_PATH', 'http://localhost:8090/configs');
 
 function Arethusa() {
   var self = this;
 
-  self.basePath = '..';
+  self.basePath = 'http://localhost:8090';
 
   function Api(injector) {
     var api = this;

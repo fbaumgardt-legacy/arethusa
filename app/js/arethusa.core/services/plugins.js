@@ -33,7 +33,7 @@ angular.module('arethusa.core').service('plugins', [
         }
 
         function getLocation(location) {
-          return (location || 'dist/' + toSnakeCase(self.name) + '.min.js');
+          return (location || toSnakeCase(self.name) + '.min.js');
         }
 
         this.name = getName(name, location);

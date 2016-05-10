@@ -23,5 +23,5 @@ angular.module('arethusa.core', [
   'angularUUID2',
   'dndLists'
 ])
-  .value('BASE_PATH', '..')
+  .value('BASE_PATH', 'http://localhost:8090')
   .constant('_', window._);
