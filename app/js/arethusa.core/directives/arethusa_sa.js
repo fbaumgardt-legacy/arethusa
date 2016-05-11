@@ -1,6 +1,7 @@
 angular.module('arethusa.core').directive('arethusaStandalone',['$http','configurator',
     function($http,configurator) {
         return {
+            controller: 'ArethusaCtrl',
             restrict: 'E',
             scope: {
                 conf: "@"
