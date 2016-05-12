@@ -20,24 +20,18 @@ angular.module('arethusa', [
 
 angular.module('arethusa').constant('_', window._);
 
+/*
+The route provides for a template and a controller
+What happens to the stuff in resolve?
+ */
+
 angular.module('arethusa').config([
-  '$routeProvider',
   '$translateProvider',
   'localStorageServiceProvider',
   'LOCALES',
-  'MAIN_ROUTE',
-  'MORPH_TOOLS',
-  'LANDING',
-  function ($routeProvider, $translateProvider, localStorageServiceProvider,
-            LOCALES, MAIN_ROUTE, MORPH_TOOLS, LANDING) {
-    if (aU.isArethusaMainApplication()) {
-      $routeProvider.when('/', LANDING);
-      $routeProvider.when('/morph_tools', MORPH_TOOLS);
-      //$routeProvider.when('/conf_editor', CONF_ROUTE);
-      $routeProvider.when('/:conf', MAIN_ROUTE);
-      $routProvider.when('/local',LOCAL_ROUTE);
-      //$routeProvider.when('/conf_editor/:conf', CONF_ROUTE);
-    }
+  function ($translateProvider, localStorageServiceProvider,
+            LOCALES) {
+    console.log("yep")
 
     var localesMap = {};
     for (var i = LOCALES.length - 1; i >= 0; i--){
@@ -47,7 +41,7 @@ angular.module('arethusa').config([
 
     $translateProvider
       .useStaticFilesLoader({
-        prefix: arethusa.basePath + '/i18n/',
+        prefix: 'http://localhost:8090/i18n/',
         suffix: '.json'
       })
 
@@ -74,6 +68,8 @@ function Arethusa() {
     this.configurator = injector.get('configurator');
 
     this.configure = function(conf) {
+      console.log("CONF:");
+      console.log(conf);
       api.configurator.defineConfiguration(conf);
     };
 
@@ -90,6 +86,8 @@ function Arethusa() {
     };
 
     this.compile = function(element) {
+      console.log("COMPILE");
+      console.log(element);
       var html = element[0].innerHTML;
       element.html($compile(html)(element.scope()));
     };
@@ -108,7 +106,9 @@ function Arethusa() {
     angular.module('arethusa.core').value('BASE_PATH', path);
   };
 
-  this.start = function(id, conf, params) {
+  this.start = function(id, c, p) {
+    var conf = c;
+    var params = p;
     var res = {};
     id = id.match(/^#/) ? id : '#' + id;
     var target = angular.element(id);
@@ -116,7 +116,8 @@ function Arethusa() {
     target.ready(function() {
       var injector = angular.bootstrap(id, ['arethusa']);
       var api = new Api(injector);
-
+      console.log("API:");
+      console.log(api)
       api.watchUrl(false);
       api.setParams(params);
       api.configure(conf);

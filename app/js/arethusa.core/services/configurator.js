@@ -92,6 +92,8 @@ angular.module('arethusa.core').service('configurator', [
      * TODO
      */
     this.defineConfiguration = function (confFile, location) {
+      console.log("CONF_FILE");
+      console.log(confFile);
       this.configuration = angular.extend(new Template(), confFile);
       this.confFileLocation = location;
 
@@ -99,6 +101,7 @@ angular.module('arethusa.core').service('configurator', [
       // $routeProvider, we $timeout to call, so that we are
       // guaranteed to see it in the ArethusaCtrl
       $timeout(function() {
+        console.log("CONF_LOADED");
         $rootScope.$broadcast('confLoaded');
       });
     };
