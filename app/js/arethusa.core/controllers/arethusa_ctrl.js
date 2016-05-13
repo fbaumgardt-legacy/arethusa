@@ -18,28 +18,20 @@ angular.module('arethusa.core').controller('ArethusaCtrl', [
 
     var translations = translator(['loadInProgress', 'loadComplete']);
 
-    console.log("ARETHUSA_CTRL");
     $scope.$on('confLoaded', bootstrap);
 
     this.bs = bootstrap;
 
     function bootstrap() {
-      console.log("BOOTSTRAP");
       documentStore.reset();
-      console.log("1")
       $scope.aU = arethusaUtil;
-      console.log("2")
       $scope.debug = false;
-      console.log("3")
       $scope.toggleDebugMode = function () {
         $scope.debug = !$scope.debug;
       };
-      console.log("4")
 
       var conf = configurator.configurationFor('main');
 
-      console.log("CTRL_CONF");
-      console.log(conf);
       $scope.state = state;
       $scope.plugins = plugins;
       $scope.gS = globalSettings;

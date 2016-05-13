@@ -20,18 +20,12 @@ angular.module('arethusa', [
 
 angular.module('arethusa').constant('_', window._);
 
-/*
-The route provides for a template and a controller
-What happens to the stuff in resolve?
- */
-
 angular.module('arethusa').config([
   '$translateProvider',
   'localStorageServiceProvider',
   'LOCALES',
   function ($translateProvider, localStorageServiceProvider,
             LOCALES) {
-    console.log("yep")
 
     var localesMap = {};
     for (var i = LOCALES.length - 1; i >= 0; i--){
@@ -57,78 +51,42 @@ angular.module('arethusa').config([
 angular.module('arethusa').value('CONF_PATH', 'http://localhost:8090/configs');
 
 function Arethusa() {
+
   var self = this;
 
-  self.basePath = 'http://localhost:8090';
-
-  function Api(injector) {
-    var api = this;
-    var $compile = injector.get('$compile');
-
-    this.configurator = injector.get('configurator');
-
-    this.configure = function(conf) {
-      console.log("CONF:");
-      console.log(conf);
-      api.configurator.defineConfiguration(conf);
-    };
-
-    this.watchUrl = function(bool) {
-      injector.get('locator').watchUrl(bool);
-    };
-
-    this.setBasePath = function(path) {
-      injector.get('basePath').set(path);
-    };
-
-    this.setParams = function(a, b) {
-      injector.get('locator').set(a, b);
-    };
-
-    this.compile = function(element) {
-      console.log("COMPILE");
-      console.log(element);
-      var html = element[0].innerHTML;
-      element.html($compile(html)(element.scope()));
-    };
-
-    this.state = injector.get('state');
-
-    //this.setBasePath(self.basePath);
-  }
-
-  this.setConfPath = function(path) {
-    angular.module('arethusa').value('CONF_PATH', path);
+  this.on = function(id) {
+    self.id = id.match(/^#/) ? id : '#' + id;
+    var template = document.createElement("div");
+    template.setAttribute("ng-include",'gS.layout.template');
+    template.setAttribute("class",'fade slow');
+    document.getElementById(self.id.slice(1)).appendChild(template);
+    var target = angular.element('#'+self.id);
+    target.attr('ng-controller','ArethusaCtrl');
+    return self;
   };
 
-  this.setBasePath = function(path) {
-    self.basePath = path;
-    angular.module('arethusa.core').value('BASE_PATH', path);
+  this.from = function(url) {
+    var arethusa = angular.module('arethusa');
+    var arethusa_core = angular.module('arethusa.core');
+    arethusa.value('CONF_PATH',url+"/configs");
+    arethusa.value('BASE_PATH',url);
+    arethusa_core.value('BASE_PATH',url);
+    return self;
   };
-
-  this.start = function(id, c, p) {
-    var conf = c;
-    var params = p;
-    var res = {};
-    id = id.match(/^#/) ? id : '#' + id;
-    var target = angular.element(id);
-    target.attr('ng-controller', 'ArethusaCtrl');
-    target.ready(function() {
-      var injector = angular.bootstrap(id, ['arethusa']);
-      var api = new Api(injector);
-      console.log("API:");
-      console.log(api)
-      api.watchUrl(false);
-      api.setParams(params);
-      api.configure(conf);
-
-      api.compile(target);
-
-      angular.extend(res, api);
+  this.with = function(conf) {
+    //is conf url or object?
+    
+    self.conf = $.when();
+    return self;
+  };
+  this.start = function() {
+    self.conf.then(function(res) {
+      var injector = angular.bootstrap('#'+id,['arethusa']);
+      var configurator = injector.get('configurator');
+      configurator.defineConfiguration(conf);
     });
-
-    return res;
   };
+
 }
 
 var arethusa =  new Arethusa();

@@ -3,29 +3,20 @@
     <title>
         ArethusAMD
     </title>
-    <link rel="stylesheet" href="http://localhost:8090/arethusa.min.css">
-    <link rel="stylesheet" href="http://localhost:8090/vendor/foundation-icons/foundation-icons.css">
-    <link rel="stylesheet" href="http://localhost:8090/vendor/font-awesome-4.1.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://localhost:8090/vendor/angular-foundation-colorpicker/css/colorpicker.css">
-    <!--script type="application/javascript" src="http://localhost:8090/bower_components/jquery/dist/jquery.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/bower_components/angular/angular.js"></script-->
-    <script type="application/javascript" src="http://localhost:8090/arethusa_packages.concat.js"></script>
-    <!-- script type="application/javascript" src="http://localhost:8090/arethusa.util.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.core.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.context_menu.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.history.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.tools.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.main.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.text.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.morph.concat.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.table.concat.js"></script-->
-    <script type="application/javascript" src="http://localhost:8090/configs/amd.js"></script>
-    <script type="application/javascript" src="http://localhost:8090/arethusa.min.js"></script>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
     <script type="text/javascript">
-        var url = "http://localhost:8090";
-        var params = {doc: "1.xml"};
-        var id = "#arethusa";
-        var incl = "<div ng-include='gS.layout.template' class='fade slow'></div>"
+        (function($) {
+            $.getStylesheet = function (href) {
+                var $d = $.Deferred();
+                var $link = $('<link/>', {
+                    rel: 'stylesheet',
+                    type: 'text/css',
+                    href: href
+                }).appendTo('head');
+                $d.resolve($link);
+                return $d.promise();
+            };
+        })(jQuery);
     </script>
 </head>
 

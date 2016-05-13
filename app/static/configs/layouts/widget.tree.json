@@ -1,0 +1,18 @@
+{
+  "layouts" : [
+    {
+      "name" : "Grid",
+      "template" : "js/templates/main_grid.html",
+      "grid" : [
+        {
+          "plugin" : "depTree",
+          "size" : [23, 25],
+          "position" : [0, 0],
+          "style" : { "overflow": "hidden"}
+        }
+      ]
+    }
+  ]
+}
+
+

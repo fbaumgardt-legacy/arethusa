@@ -1,0 +1,45 @@
+{
+  "main" : {
+    "debug" : false,
+    "showKeys" : false,
+    "@include" : "static/configs/layouts/widget.tree.json",
+    "chunkParam" : "chunk",
+    "auxConfPath": "http://services.perseids.org/arethusa-configs",
+    "retrievers" : {
+      "TreebankRetriever" : {
+        "resource" : "arethusaServerTreebank",
+        "docIdentifier" : "treebank",
+        "preselector" : "w"
+      }
+    },
+    "plugins" : [
+      //"text",
+      //"artificialToken",
+      "morph",
+      //"relation",
+      "depTree"
+    ]
+  },
+
+  "navigator" : {
+    "chunkSize" : 999
+  },
+
+  "resources" : {
+    "@include" : "static/configs/resources/amd.json"
+  },
+
+  "plugins" : {
+    //"text" : { "@include":"js/arethusa.text/configs/headless.json" },
+
+    "depTree" : { "@include":"js/arethusa.dep_tree/configs/conf.json" },
+
+    "morph" : { "@include":"js/arethusa.morph/configs/conf.json" }//,
+
+    //"relation" : { "@include":"js/arethusa.relation/configs/headless.json" },
+
+    //"artificialToken" : { "@include":"js/arethusa.artificial_token/configs/conf.json" },
+
+    //"sg" : { "@include":"js/arethusa.sg/configs/headless.json" }
+  }
+}
