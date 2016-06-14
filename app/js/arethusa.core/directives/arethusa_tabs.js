@@ -56,7 +56,7 @@ angular.module('arethusa.core').directive('arethusaTabs', [
         }
 
         function createTabMap(tabs) {
-          return _.inject(tabs, function(memo, tab) {
+          return _.reduce(tabs, function(memo, tab) {
             memo[tab.name] = tab;
             return memo;
           }, {});
@@ -114,7 +114,7 @@ angular.module('arethusa.core').directive('arethusaTabs', [
         }
 
         function updateVisibleTabs() {
-          scope.visibleTabs =_.inject(scope.list, function(memo, item) {
+          scope.visibleTabs =_.reduce(scope.list, function(memo, item) {
             if (isActive(item)) {
               memo.push(tabMap[item.name]);
             }

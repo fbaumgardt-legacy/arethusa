@@ -270,7 +270,7 @@ angular.module('arethusa.morph').service('morphLocalStorage', [
     // maps morphology properties (string form) to the frequency count
     function preferencesToCounts(string) {
       var prefs = readPreference(retrievePreference(string));
-      return _.inject(_.filter(prefs), function(memo, pref) {
+      return _.reduce(_.filter(prefs), function(memo, pref) {
         memo[formToKey(pref.form)] = parseInt(pref.count);
         return memo;
       }, {});
@@ -294,7 +294,7 @@ angular.module('arethusa.morph').service('morphLocalStorage', [
      */
     function sortByPreference(string, forms) {
       var counts = preferencesToCounts(string);
-      var selectors = _.inject(forms, function(memo, form) {
+      var selectors = _.reduce(forms, function(memo, form) {
         memo[formToKey(form)] = form;
         return memo;
       }, {});
@@ -349,7 +349,7 @@ angular.module('arethusa.morph').service('morphLocalStorage', [
     // key (morph.prefs. or morph.forms.) and returns them in an object 
     // mapping the form string to data (preferences or forms)
     function collectFromStore(keyFragment) {
-      return _.inject(arethusaLocalStorage.keys(), function(memo, key) {
+      return _.reduce(arethusaLocalStorage.keys(), function(memo, key) {
         var match = key.match('^' + keyFragment + '.(.*)');
         if (match) {
           memo[match[1]] = arethusaLocalStorage.get(key);

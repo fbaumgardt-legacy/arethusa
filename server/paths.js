@@ -1,4 +1,4 @@
 module.exports = {
-  examples: 'data/examples/data',
+  examples: 'dist/examples/data',
   configs:  'data/aux_configs'
 };

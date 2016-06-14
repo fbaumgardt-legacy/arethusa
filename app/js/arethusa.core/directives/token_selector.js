@@ -114,7 +114,7 @@ angular.module('arethusa.core').directive('tokenSelector', [
         ];
 
         var areAllSelected = function(tokens) {
-          return _.all(Object.keys(tokens), function(tokenId) {
+          return _.every(Object.keys(tokens), function(tokenId) {
             return state.isClicked(tokenId);
           });
         };

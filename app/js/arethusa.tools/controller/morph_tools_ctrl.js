@@ -131,7 +131,7 @@ angular.module('arethusa.tools').controller('MorphToolsCtrl', [
         'exportFrequency'
       ];
 
-      $scope.status = _.inject(fields, function(memo, field) {
+      $scope.status = _.reduce(fields, function(memo, field) {
         memo[field] = { count: null };
         return memo;
       }, {});
@@ -209,14 +209,14 @@ angular.module('arethusa.tools').controller('MorphToolsCtrl', [
     }
 
     function countForms(forms) {
-      return _.inject(forms, function(memo, f) {
+      return _.reduce(forms, function(memo, f) {
         memo += f.length;
         return memo;
       }, 0);
     }
 
     function countFrequencyForms(data) {
-      return _.inject(data, function(memo, v, _) {
+      return _.reduce(data, function(memo, v, _) {
         memo += v.split(localStorage.delimiters.preference).length;
         return memo;
       }, 0);

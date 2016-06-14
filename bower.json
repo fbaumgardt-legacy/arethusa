@@ -52,7 +52,7 @@
     "angular-highlightjs": "~0.3.2",
     "angular-local-storage": "~0.1.5",
     "angular-uuid2": "",
-    "lodash": "~2.4.1",
+    "lodash": "~4.13.0",
     "stacktrace-js": "~0.6.4",
     "angular-drag-and-drop-lists": "~1.2.0"
   },
